@@ -54,6 +54,7 @@ def setup_livedata():
 @app.route('/')
 def get_index():
     app.logger.info("received request")
+    app.logger.info(app.config)
     data = app.config['data']
     app.logger.info(data)
         
