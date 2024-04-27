@@ -4,7 +4,9 @@ import os
 data = []
 
 def setup_livedata():
-    key = os.environ("DATABENTO_API_KEY")
+    key = os.environ.get("DATABENTO_API_KEY")
+    if key is None:
+        raise Exception ("Unknown DATABENTO_API_KEY")
     
     # Create a live client
     client = db.Live(key=key)
