@@ -63,8 +63,10 @@ def get_index():
 
 
 if __name__ == '__main__':
+    app.logger.setLevel(logging.DEBUG)
+    app.logger.info("Initialized loggers")
+    setup_livedata()    
     app.run(debug=True)
-    setup_livedata()
 else:
     gunicorn_logger = logging.getLogger('gunicorn.error')
     app.logger.handlers = gunicorn_logger.handlers
