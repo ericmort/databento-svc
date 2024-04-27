@@ -9,7 +9,7 @@ app = Flask(__name__)
 data = []
 
 def user_callback(record: db.DBNRecord) -> None:
-    app.logger.info(f"callback: ${record}")
+    app.logger.info(f"callback2: ${record}")
     data.append({"instrument_id" : record.instrument_id})
         
 
@@ -66,11 +66,10 @@ def get_index():
 
 if __name__ == '__main__':
     app.run(debug=True)
+    setup_livedata()
 else:
     gunicorn_logger = logging.getLogger('gunicorn.error')
     app.logger.handlers = gunicorn_logger.handlers
     app.logger.setLevel(logging.DEBUG)
     app.logger.info("Initialized loggers")
-    
-
-setup_livedata()
+    setup_livedata()
