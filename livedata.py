@@ -36,14 +36,3 @@ def setup_livedata():
 
     client.start()
 
-#client = db.Historical("db-LMyD7RmtLtg93CUJWev5F3g8Mh93G")
-#data = client.timeseries.get_range(
-#    dataset="GLBX.MDP3",
-#    symbols="ESM4",
-#    start="2024-04-25T14:20:00",
-#    end="2024-04-25T14:20:10",
-#)#
-
-##data.replay(print)
-#df = data.to_df()
-#print(df.iloc[0].to_json(indent=4))
