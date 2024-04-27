@@ -11,6 +11,7 @@ data = []
 def user_callback(record: db.DBNRecord) -> None:
     app.logger.info(f"callback2: ${record}")
     data.append({"instrument_id" : record.instrument_id})
+    app.logger.info(data)
         
 
 # Create a callback to handle exceptions from `user_callback`
