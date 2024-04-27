@@ -14,7 +14,7 @@ def get_es():
     app.logger.info("received request")
         
     for x in livedata.data:
-        app.logger.debug({
+        app.logger.info({
             "instrument_id" : x["instrument_id"]
         })
     app.logger.info(livedata.data)

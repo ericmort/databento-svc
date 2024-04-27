@@ -10,7 +10,7 @@ def setup_livedata(app):
         raise Exception ("Unknown DATABENTO_API_KEY")
     
     masked = len(key[:-4])*"#"+key[-4:]
-    app.logger.debug(f'DATABENTO_API_KEY: ${masked}')
+    app.logger.info(f'DATABENTO_API_KEY: ${masked}')
 
     # Create a live client
     client = db.Live(key=key)
