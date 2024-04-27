@@ -6,13 +6,10 @@ import os
 
 app = Flask(__name__)
 
-data = []
-
 def user_callback(record: db.DBNRecord) -> None:
     app.logger.info(f"callback2: ${record}")
-    global data
-    data.append({"instrument_id" : record.instrument_id})
-    app.logger.info(data)
+    app.config['data'].append({"instrument_id" : record.instrument_id})
+    app.logger.info(app.config['data'])
         
 
 # Create a callback to handle exceptions from `user_callback`
@@ -20,7 +17,8 @@ def error_handler(exception: Exception) -> None:
     app.logger.info(f"an error occurred {exception}")
 
 def setup_livedata():
-    global data
+    app.config['data'] = []
+    
     key = os.environ.get("DATABENTO_API_KEY")
     if key is None:
         raise Exception ("Unknown DATABENTO_API_KEY")
@@ -55,16 +53,11 @@ def setup_livedata():
 
 @app.route('/')
 def get_index():
-    global data
     app.logger.info("received request")
-        
-    for x in data:
-        app.logger.info({
-            "instrument_id" : x["instrument_id"]
-        })
-    
+    data = app.config['data']
     app.logger.info(data)
-    return data
+        
+    return app.config['data']
 
 
 
