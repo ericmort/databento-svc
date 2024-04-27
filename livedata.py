@@ -1,9 +1,10 @@
 import databento as db
 import os 
+import logging 
 
 data = []
 
-def setup_livedata():
+def setup_livedata(app):
     key = os.environ.get("DATABENTO_API_KEY")
     if key is None:
         raise Exception ("Unknown DATABENTO_API_KEY")
@@ -21,8 +22,9 @@ def setup_livedata():
     )
 
     def user_callback(record: db.DBNRecord) -> None:
-        print(f"callback run for {record}")
-        data.append(record)
+        #print(f"callback run for {record}")
+        app.logger.debug(record)
+        data.append({"instrument_id" : record.instrument_id})
 
 
     # Create a callback to handle exceptions from `user_callback`
