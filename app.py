@@ -10,6 +10,7 @@ data = []
 
 def user_callback(record: db.DBNRecord) -> None:
     app.logger.info(f"callback2: ${record}")
+    global data
     data.append({"instrument_id" : record.instrument_id})
     app.logger.info(data)
         
@@ -19,6 +20,7 @@ def error_handler(exception: Exception) -> None:
     app.logger.info(f"an error occurred {exception}")
 
 def setup_livedata():
+    global data
     key = os.environ.get("DATABENTO_API_KEY")
     if key is None:
         raise Exception ("Unknown DATABENTO_API_KEY")
@@ -53,6 +55,7 @@ def setup_livedata():
 
 @app.route('/')
 def get_index():
+    global data
     app.logger.info("received request")
         
     for x in data:
