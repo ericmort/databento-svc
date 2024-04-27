@@ -10,7 +10,8 @@ def get_es():
         app.logger.debug({
             "instrument_id" : x["instrument_id"]
         })
-        return livedata.data
+        
+    return livedata.data
 
 if __name__ == '__main__':
     app.run(debug=True)
